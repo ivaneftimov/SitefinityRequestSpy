@@ -50,7 +50,7 @@
         </tr>
         <tr class="row" ng-repeat="request in requests" ng-class="{ssl: request.Protocol === 'https'}">
             <td tooltip="{{request.Url}}" tooltip-persistent>{{ request.Url | limitTo: 100 }}</td>
-            <td>{{ request.Response.StatusCode }}</td>
+            <td ng-class="{non200: request.Response.StatusCode !== 200}">{{ request.Response.StatusCode }}</td>
         </tr>
     </table>
 </div>
@@ -70,6 +70,9 @@
     }
     .ssl {
         color: blueviolet;
+    }
+    .non200 {
+        color: red;
     }
     td {
         padding: 2px 10px 2px 10px;
