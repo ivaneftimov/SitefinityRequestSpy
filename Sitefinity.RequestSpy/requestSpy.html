@@ -1,0 +1,91 @@
+﻿<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+<script>
+    var requestSpyApp = angular.module('requestSpyApp', []);
+
+    requestSpyApp.controller('requestSpyCtrl', ['$scope', '$http', '$timeout', 'SERVICE_URL', function ($scope, $http, $timeout, SERVICE_URL) {
+        // var appVirtualPath = document.getElementById('applicationVirtualPath') ? document.getElementById('applicationVirtualPath').value : '';
+
+        $scope.title = "Request spy";
+        $scope.toggled = false;
+        var timer;
+        var scheduled = false;
+        
+        $scope.load = function () {
+            $scope.loading = true;
+            $http.get(SERVICE_URL)
+            .then(function (response) {
+                $scope.requests = response.data;
+                $scope.loading = false;
+
+                if (!scheduled) {
+                    timer = $timeout(function () {
+                        $scope.load();
+                    }, 5000);
+                }                
+            }, function (response) {
+                var a = response;
+                $scope.loading = false;
+            });
+        }
+
+        $scope.toggle = function () {
+            $scope.toggled = !$scope.toggled;
+        }
+    }]);
+</script>
+
+<div class="reqspy" ng-app="requestSpyApp" ng-controller="requestSpyCtrl">
+    <h3 class="sfBlack">{{ title }} <b><a class="ctrls" ng-click="toggle();load()" ng-show="!toggled">&#9650</a>
+        <a class="ctrls" ng-click="toggle()" ng-show="toggled">&#9660</a>
+        <a class="ctrls" ng-click="load()" ng-show="toggled">&#8635</a></b>
+    </h3>
+
+    <div style="height:20px" ng-show="toggled">
+        <div class="sfLoadingDataImage" ng-show="loading"></div>
+    </div>
+    <table ng-show="toggled">
+        <tr class="row">
+            <th><b>URL</b></th>
+            <th><b>Status Code</b></th>
+        </tr>
+        <tr class="row" ng-repeat="request in requests" ng-class="{ssl: request.Protocol === 'https'}">
+            <td tooltip="{{request.Url}}" tooltip-persistent>{{ request.Url | limitTo: 100 }}</td>
+            <td>{{ request.Response.StatusCode }}</td>
+        </tr>
+    </table>
+</div>
+
+<style>
+    .reqspy {
+        opacity: 0.8;
+        position: fixed;
+        right: 0px;
+        bottom: 0px;
+        z-index: 9999;
+        background-color: #f9edbe;
+        border: 1px solid #f0c36d;
+    }
+    .ctrls {
+        border: 1px solid #f0c36d;
+    }
+    .ssl {
+        color: blueviolet;
+    }
+    td {
+        padding: 2px 10px 2px 10px;
+    }
+    [tooltip]:before {
+        position: absolute;
+        content: attr(tooltip);
+        opacity: 0;
+    }
+    [tooltip]:hover:before {
+        opacity: 1;
+        background: yellow;
+        margin-top: -5px;
+        margin-left: -170px;
+    }
+    [tooltip]:not([tooltip-persistent]):before {
+        pointer-events: none;
+    }
+</style>
