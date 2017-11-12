@@ -1,18 +1,25 @@
-﻿using Telerik.Sitefinity.Modules.GenericContent.Configuration;
+﻿using System.Configuration;
+using Telerik.Sitefinity.Configuration;
 
 namespace Sitefinity.RequestSpy
 {
-    public class RequestSpyConfig : ModuleConfigBase
+    public class RequestSpyConfig : ConfigSection
     {
         /// <summary>
-        /// Initialize the default providers for the module.
+        /// Gets or set PageOnly option.
         /// </summary>
-        /// <param name="providers">
-        /// The dictionary of the provider definitions.
-        /// </param>
-        protected override void InitializeDefaultProviders(Telerik.Sitefinity.Configuration.ConfigElementDictionary<string, Telerik.Sitefinity.Configuration.DataProviderSettings> providers)
+        [ConfigurationProperty("pagesOnly", DefaultValue = false)]
+        public bool PagesOnly
         {
-            // do nothing for now
+            get
+            {
+                return (bool)this["pagesOnly"];
+            }
+
+            set
+            {
+                this["pagesOnly"] = value;
+            }
         }
     }
 }

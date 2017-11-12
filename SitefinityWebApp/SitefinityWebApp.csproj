@@ -1269,6 +1269,7 @@
     <Content Include="App_Data\Sitefinity\Configuration\ProjectConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\SecurityConfig.config" />
     <Content Include="App_Data\Sitefinity\Configuration\SystemConfig.config" />
+    <Content Include="App_Data\Sitefinity\Configuration\RequestSpyConfig.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sitefinity.RequestSpy\Sitefinity.RequestSpy.csproj">

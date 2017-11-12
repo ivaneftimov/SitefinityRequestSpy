@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Hosting;
 using System.Web.Script.Serialization;
 using Telerik.Sitefinity.Abstractions;
+using Telerik.Sitefinity.Configuration;
+using Telerik.Sitefinity.Services;
+using Telerik.Sitefinity.Web;
 
 namespace Sitefinity.RequestSpy
 {
@@ -52,43 +55,45 @@ namespace Sitefinity.RequestSpy
                 RequestSpyHttpModule.ReturnServiceResponse(application.Context);
                 return;
             }
-
-            string requestId = Guid.NewGuid().ToString();
-
-            if(RequestSpyHttpModule.requestBuffer.Count == 15)
-            {
-                RequestSpyHttpModule.requestBuffer.Take();
-            }
-
-            RequestSpyHttpModule.requestBuffer.Add(new RequestDto()
-            {
-                Id = requestId,
-                Url = application.Context.Request.Url.AbsoluteUri,
-                Protocol = application.Context.Request.Url.Scheme,
-            });
-
-            application.Context.Items.Add("req-spy-id", requestId);
         }
 
         private void Context_EndRequest(object sender, EventArgs e)
         {
             HttpApplication application = (HttpApplication)sender;
 
-            if (!Bootstrapper.IsReady || application.Context.Request.Url.AbsolutePath == RequestSpyHttpModule.requestSpyUrl)
+            bool isBackendRequest = application.Context.Items.Contains(SystemManager.IsBackendRequestKey) && (bool)application.Context.Items[SystemManager.IsBackendRequestKey];            
+
+            if (!Bootstrapper.IsReady 
+                || application.Context.Request.Url.AbsolutePath == RequestSpyHttpModule.requestSpyUrl
+                || isBackendRequest)                
             {
                 return;
             }
 
-            var contextItems = application.Context.Items;
-            if (contextItems.Contains("req-spy-id"))
+            if (Config.Get<RequestSpyConfig>().PagesOnly)
             {
-                var requestMatch = RequestSpyHttpModule.requestBuffer.Where(r => r.Id == contextItems["req-spy-id"].ToString()).FirstOrDefault();
+                SiteMapProvider siteMapProvider = SiteMapBase.GetSiteMapProvider("FrontendSiteMap");
+                var frontendPage = siteMapProvider.FindSiteMapNode(application.Context.Request.Url.AbsolutePath);
+                bool isFrontendPage = frontendPage != null;
 
-                if (requestMatch != null)
+                if (!isFrontendPage && application.Context.Response.StatusCode == 200) // status code condition added in order to catch non-200 requests, e.g. 404
                 {
-                    requestMatch.Response = new ResponseDto(application.Context.Response.StatusCode);
-                }                
+                    return;
+                }
             }
+
+            if (RequestSpyHttpModule.requestBuffer.Count == 15)
+            {
+                RequestSpyHttpModule.requestBuffer.Take();
+            }
+
+            RequestSpyHttpModule.requestBuffer.Add(new RequestDto()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Url = application.Context.Request.Url.AbsoluteUri,
+                Protocol = application.Context.Request.Url.Scheme,
+                Response = new ResponseDto(application.Context.Response.StatusCode)
+            });
         }
 
         /// <summary>
