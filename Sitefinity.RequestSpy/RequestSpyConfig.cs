@@ -6,7 +6,7 @@ namespace Sitefinity.RequestSpy
     public class RequestSpyConfig : ConfigSection
     {
         /// <summary>
-        /// Gets or set PageOnly option.
+        /// Gets or set PagesOnly option.
         /// </summary>
         [ConfigurationProperty("pagesOnly", DefaultValue = false)]
         public bool PagesOnly
