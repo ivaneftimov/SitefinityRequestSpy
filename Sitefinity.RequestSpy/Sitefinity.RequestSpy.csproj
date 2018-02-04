@@ -278,7 +278,7 @@
     <Compile Include="ResponseDto.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="OpenAccessNuGet.targets" />
+    <None Include="OpenAccessNuGet.targets" />
     <EmbeddedResource Include="requestSpy.html" />
     <None Include="packages.config" />
   </ItemGroup>
