@@ -36,4 +36,4 @@ using System.Web;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: PreApplicationStartMethod(typeof(Sitefinity.RequestSpy.Loader), "LoadModule")]
+[assembly: PreApplicationStartMethod(typeof(Sitefinity.RequestSpy.RequestSpyInstaller), "PreApplicationStart")]

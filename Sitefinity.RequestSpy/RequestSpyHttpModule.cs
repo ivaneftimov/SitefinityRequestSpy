@@ -43,7 +43,7 @@ namespace Sitefinity.RequestSpy
 
         private void Context_BeginRequest(object sender, EventArgs e)
         {
-            if (!Bootstrapper.IsReady)
+            if (!Bootstrapper.IsReady || !IsSfModuleActive())
             {
                 return;
             }
@@ -64,6 +64,7 @@ namespace Sitefinity.RequestSpy
             bool isBackendRequest = application.Context.Items.Contains(SystemManager.IsBackendRequestKey) && (bool)application.Context.Items[SystemManager.IsBackendRequestKey];            
 
             if (!Bootstrapper.IsReady 
+                || !IsSfModuleActive()
                 || application.Context.Request.Url.AbsolutePath == RequestSpyHttpModule.requestSpyUrl
                 || isBackendRequest)                
             {
@@ -130,6 +131,13 @@ namespace Sitefinity.RequestSpy
 
             RequestSpyHttpModule.requestBuffer.Dispose();
             RequestSpyHttpModule.requestBuffer = null;
+        }
+
+        private static bool IsSfModuleActive()
+        {
+            return SystemManager.ApplicationModules != null
+                && SystemManager.ApplicationModules.ContainsKey(RequestSpyModule.ModuleName) 
+                && !(SystemManager.ApplicationModules[RequestSpyModule.ModuleName] is InactiveModule);
         }
 
         private static BlockingCollection<RequestDto> requestBuffer;

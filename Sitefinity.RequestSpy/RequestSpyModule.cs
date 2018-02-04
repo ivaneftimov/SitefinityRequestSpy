@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Telerik.Sitefinity;
 using Telerik.Sitefinity.Abstractions;
 using Telerik.Sitefinity.Configuration;
@@ -120,6 +116,16 @@ namespace Sitefinity.RequestSpy
         /// The name of the module
         /// </summary>
         public const string ModuleName = "SitefinityRequestSpy";
+
+        /// <summary>
+        /// The title of the module
+        /// </summary>
+        public const string ModuleTitle = "Sitefinity Request Spy";
+
+        /// <summary>
+        /// The description of the module
+        /// </summary>
+        public const string ModuleDescription = "Sitefinity module which listens to every request which comes to the Sitefinity application and visualises it in the backend";
 
         /// <summary>
         /// The module page id
