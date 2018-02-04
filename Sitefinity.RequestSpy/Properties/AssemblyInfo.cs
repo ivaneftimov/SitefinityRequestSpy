@@ -7,12 +7,12 @@ using System.Web;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Sitefinity.RequestSpy")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Sitefinity module which listens to every request which comes to the Sitefinity application and visualises it in the backend")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("IvanEft")]
 [assembly: AssemblyProduct("Sitefinity.RequestSpy")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
-[assembly: AssemblyTrademark("Ivan Eftimov")]
+[assembly: AssemblyCopyright("Copyright © 2018 IvanEft")]
+[assembly: AssemblyTrademark("IvanEft")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
