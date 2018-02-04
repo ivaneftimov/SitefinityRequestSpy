@@ -3,6 +3,9 @@
 ### Sitefinity module which listens to every request which comes to the Sitefinity application and visualises it in the backend.
 
 
+### Install
+NuGet Package: https://www.nuget.org/packages/Sitefinity.RequestSpy
+
 
 ### Dependencies
  - Telerik.Sitefinity.dll
