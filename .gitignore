@@ -305,3 +305,4 @@ __pycache__/
 OpenCover/
 /SitefinityWebApp/App_Data/Sitefinity/Sitefinity.lic
 /SitefinityWebApp/App_Data/appStatusReport.html
+/nuget
