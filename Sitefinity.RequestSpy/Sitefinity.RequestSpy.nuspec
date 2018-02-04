@@ -12,5 +12,6 @@
     <description>$description$</description>
     <copyright>$copyright$</copyright>
     <tags>Sitefinity Request Spy RequestSpy IvanEft</tags>
+    <summary>$description$</summary>
   </metadata>
 </package>

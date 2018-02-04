@@ -125,7 +125,7 @@ namespace Sitefinity.RequestSpy
         /// <summary>
         /// The description of the module
         /// </summary>
-        public const string ModuleDescription = "Sitefinity module which listens to every request which comes to the Sitefinity application and visualises it in the backend";
+        public const string ModuleDescription = "Listens to every request which comes to the Sitefinity application and visualises it in the backend";
 
         /// <summary>
         /// The module page id
