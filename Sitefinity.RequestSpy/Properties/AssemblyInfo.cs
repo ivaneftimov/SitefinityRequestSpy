@@ -5,7 +5,7 @@ using System.Web;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Sitefinity Request Spy")]
+[assembly: AssemblyTitle("Sitefinity.RequestSpy")]
 [assembly: AssemblyDescription("Sitefinity module which listens to every request which comes to the Sitefinity application and visualises it in the backend")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("IvanEft")]
