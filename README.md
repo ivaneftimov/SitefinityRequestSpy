@@ -1,7 +1,7 @@
 # SitefinityRequestSpy 
 
 ### Sitefinity module which listens to every request which comes to the Sitefinity application and visualises it in the backend.
-
+![alt text](https://raw.githubusercontent.com/ivaneftimov/SitefinityRequestSpy/master/screenshot.PNG "Demo Screenshot")
 
 ### Install
 NuGet Package: https://www.nuget.org/packages/Sitefinity.RequestSpy
