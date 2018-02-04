@@ -8,6 +8,7 @@
     <owners>$author$</owners>
     <licenseUrl>https://github.com/ivaneftimov/SitefinityRequestSpy/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ivaneftimov/SitefinityRequestSpy</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/ivaneftimov/SitefinityRequestSpy/master/reqspyicon.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
